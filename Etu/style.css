@@ -1,0 +1,24 @@
+body
+{
+    background-color: #DAD7D7;
+    margin:50px;
+}
+
+
+h1
+{	
+	border-bottom:1px solid black;
+	font-size: 45px;
+	font-family: : Arial, Helvetica,Verdana,Trebuchet MS, sans-serif;
+	color:black;
+
+
+}
+h2{
+	font-size: 40px;
+	font-family: Arial, Helvetica,Verdana,Trebuchet MS, sans-serif;
+	text-align: center;
+	margin-top: 150px;
+
+
+}
