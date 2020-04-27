@@ -17,8 +17,111 @@ h1
 h2{
 	font-size: 40px;
 	font-family: Arial, Helvetica,Verdana,Trebuchet MS, sans-serif;
-	text-align: center;
-	margin-top: 150px;
+	margin-bottom: 50px;s
+}
+a{
+	text-decoration: none;
+}
+form{
+	background: #DAD7D7;
+	margin-right: auto;
+	margin-left: auto;
+ 	padding:10px;
+ 	width:780px;
+	font-size: 20px;
+	font-family: Arial, Helvetica,Verdana,Trebuchet MS, sans-serif;
+	box-shadow:3px 3px 6px;
+}
+input[type=submit] {
+ width:100px;
+ margin-left:5px;
+ box-shadow:1px 1px 1px #D83F3D;
+ cursor:pointer;
+ }
+input[type=radio] {
+ width:10px;
+ }
+input, select {
+ margin-top: 10px;
+ margin-bottom: 20px;
+ padding:3px;
+ border:1px solid #F5C5C5;
+ border-radius:5px;
+ width:200px;
+ box-shadow:3px 3px 6px #C0C0C0 inset;
+ }
+
+ input[type=submit]:hover{
+ background-color:#FCDEDE;
+ }
+
+ input[type=submit]:active{
+ background-color:#FCDEDE;
+ box-shadow:3px 3px 3px #D83F3D inset;
+}
+input, select, option {
+ background-color:#FFF3F3;
+ }
+img{
+ 	height: 300px;
+ 	width:300px;
+ 	float: right;
+ 	margin-right: 900px;
+ 	margin-top: -100px;
+ }
+ strong{
+ 	font-size: 25px;
+ }
+ .logo{
+ 	float: right;
+ 	height: 50px;
+ 	width: 50px;
+ 	margin-right: inherit;
+ }
+.intro{
+	font-family: Arial, Helvetica,Verdana,Trebuchet MS, sans-serif;
+	font-size: 30px
+}
+.cadre{
+	border: 2px solid;
+	border-color: white;
+	background-color: white;
+	padding-left: 20px;
+	height: 800px;
+}
+.monBouton{
+	margin-left: 8px;
+	margin-top: 280px;
+	float: right;
+	border-radius:12px 0 12px 0;
+	background: #B2B2B2;
+	border:none;
+	color:#fff;
+	font:bold 40px Verdana;
+	padding:6px 0 6px 0;
+	box-shadow:2px 2px 6px #999;
+	transition-property: background, color;    
+	transition-duration: 250ms; 
+}
+.monBouton:hover{
+background: #AC00F7;
+color: #fff;
+}
+
+.upload{
+	background: inherit;
+	box-shadow: inherit;
+	margin-left: inherit;
+	margin-right: inherit;
+}
 
 
+#pos{
+	margin-right: 200px;
+}
+
+p{
+	font-style: italic;
+	font-size: 20px;
+	font-family: Arial, Helvetica,Verdana,Trebuchet MS, sans-serif;
 }
