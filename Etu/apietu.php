@@ -28,8 +28,7 @@ function Tabajason($tab){
 	return json_encode($tab);
 }
 
-$info= ApiEtu('LpiWS','1
-	');
+$info= ApiEtu('LpiWS','1');
 $jayson= Tabajason($info);
 
 echo $jayson;
