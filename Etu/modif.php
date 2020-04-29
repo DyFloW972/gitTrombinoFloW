@@ -42,7 +42,7 @@
 	{
     $newcontenu = '';
     // Variable contenant la nouvelle ligne :
-    $nouvelle_ligne = $_GET['nom'].";".$_GET['prenom'].";".$_GET['ident'].";".md5($_GET['ident'].$_GET['mdp']).";".$_GET['classe'].";".$_GET['groupe']."\n";
+    $nouvelle_ligne = $_GET['nom'].";".$_GET['prenom'].";".$_GET['ident'].";".md5($_GET['ident'].$_GET['mdp']).";".$_GET['classe'].";".$_GET['groupe'].";"."\n";
     // Lecture du fichier ligne par ligne :
     while (($ligne = fgets($monfichier)) !== FALSE)
     {
@@ -63,9 +63,9 @@
     fputs($fichierecriture, $newcontenu);
     fclose($fichierecriture);
     echo("<p>Données modifiées</p>");
+}
 }              
 ?>
-	}
 		
 	</div>
 

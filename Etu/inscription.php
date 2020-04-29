@@ -30,7 +30,9 @@
 
 		 Votre mot de passe:
 		<input placeholder="mot de passe" type="password" name="mdp">
-
+		<br>
+		Confirmez votre mot de passe:
+		<input type="password" name="confirm">
 		<br>
 		<input type="submit" value="Valider" id="sub">
 	</form>
@@ -38,38 +40,42 @@
 	<?php
 function souscription(){
 	if (isset($_GET['ident'])){
-	$contenu=file('bdd.csv');
-	$found= FALSE;
-	for ($i=0; $i < sizeof($contenu) ; $i++) { 
-		$Clignes= explode(";", $contenu[$i]);
-		$Clignes[1]=str_replace("\n","",$Clignes[1]);
-		if ($_GET['ident']==$Clignes[2] && md5($_GET['ident'].$_GET['mdp'])==$Clignes[3]) {
-	        $found=TRUE;
-	    }
+		if ($_GET['mdp']==$_GET['confirm']) {
+			$contenu=file('bdd.csv');
+			$found= FALSE;
+			for ($i=0; $i < sizeof($contenu) ; $i++) { 
+				$Clignes= explode(";", $contenu[$i]);
+				if ($_GET['ident']==$Clignes[2] && md5($_GET['ident'].$_GET['mdp'])==$Clignes[3]) {
+	        		$found=TRUE;
+	    		}
 	    
-	}
-	if ($found==TRUE){
-	    echo("<p>Utilisateur déjà enregistré</p>") ;
+			}
+			if ($found==TRUE){
+	    		echo("<p>Utilisateur déjà enregistré</p>") ;
 	    
+			}
+			else{
+        		$Fecriture= fopen("bdd.csv", "a");
+				fwrite($Fecriture, $_GET['nom'].";".$_GET['prenom'].";".$_GET['ident'].";".md5($_GET['ident'].$_GET['mdp']).";".$_GET['classe'].";".$_GET['groupe'].";"."\n");
+				fclose($Fecriture);	
+	   			echo "<<p style='text-align: center;'>Nouvel utilisateur inscrit</p>";	    
+	        
+			}
+	
+	
+	
 	}
 	else{
-		
-
-
-        $Fecriture= fopen("bdd.csv", "a");
-		fwrite($Fecriture, $_GET['nom'].";".$_GET['prenom'].";".$_GET['ident'].";".md5($_GET['ident'].$_GET['mdp']).";".$_GET['classe'].";".$_GET['groupe']."\n");
-		fclose($Fecriture);	
-	   	echo "<p>Nouvel utilisateur inscrit \n</p>";	    
-	        
+		echo "Mots de passe inscrit différent";
 	}
-	
-	
-	
 }
-}
+]
 souscription();
 
 ?>
+
+	
+
 
 	</div>
 

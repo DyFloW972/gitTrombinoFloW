@@ -26,6 +26,7 @@ session_start();
 			}
 			$_SESSION['nom']=$identite[0];
 			$_SESSION['prenom']=$identite[1];
+			$_SESSION['mdp']=$identite[3];
 		?>
 
 		

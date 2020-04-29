@@ -4,7 +4,8 @@ function ApiEtu($filliere, $groupe){
 	
 
 	$recup_donnees=file('bdd.csv');
-	$infoEtu=array();
+	$infoEtu['name']=$filliere."-".$groupe;
+	$infoEtu['student']=array();
 
 	for ($i=0; $i <sizeof($recup_donnees) ; $i++) { 
 		$Ligne=explode(";", $recup_donnees[$i]);
@@ -14,10 +15,13 @@ function ApiEtu($filliere, $groupe){
 			$tableau[$i]['Prénom']=$Ligne[1];
 			$tableau[$i]['Mail']=$Ligne[2];
 			$tableau[$i]['Classe']=$Ligne[4];
-			$tableau[$i]['Groupe']=$Ligne[5];.
+			$tableau[$i]['Groupe']=$Ligne[5];
+		}
+		else{
+			continue;
 		}
 
-		array_push($infoEtu,$tableau);
+		array_push($infoEtu['student'],$tableau);
 	}
 	return($infoEtu);
 
