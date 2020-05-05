@@ -77,6 +77,8 @@ img{
  }
  figure{
  	display: inline-block;
+ 	font-family: Arial, Helvetica,Verdana,Trebuchet MS, sans-serif;
+ 	font-size: 15px;
  }
 
 
@@ -161,4 +163,16 @@ color: #fff;
 
 #arrow{
 	margin-right: 75px;
+}
+#infos{
+	text-decoration: underline;
+}
+#impress{
+	box-shadow: inherit;
+	background:inherit;
+	float: right;
+	width:inherit;
+	padding:inherit;
+	margin-right: inherit;
+	margin-left: inherit;
 }
