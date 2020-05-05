@@ -6,7 +6,10 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<h1>Formulaire d'inscription</h1>
+	<header>
+		<h1>Formulaire d'inscription</h1>
+		<a href="index.php"><img src="./images_html/house.webp" class="logo"></a>
+	</header>
 	<div class="cadre">
 	<h2>Remplissez ces champs pour vous inscrire</h2>
 	<form action="inscription.php" method="get">
@@ -41,7 +44,7 @@
 function souscription(){
 	if (isset($_GET['ident'])){
 		if ($_GET['mdp']==$_GET['confirm']) {
-			$contenu=file('bdd.csv');
+			$contenu=file('./data/bdd.csv');
 			$found= FALSE;
 			for ($i=0; $i < sizeof($contenu) ; $i++) { 
 				$Clignes= explode(";", $contenu[$i]);
@@ -55,9 +58,14 @@ function souscription(){
 	    
 			}
 			else{
-        		$Fecriture= fopen("bdd.csv", "a");
+        		$Fecriture= fopen("./data/bdd.csv", "a");
 				fwrite($Fecriture, $_GET['nom'].";".$_GET['prenom'].";".$_GET['ident'].";".md5($_GET['ident'].$_GET['mdp']).";".$_GET['classe'].";".$_GET['groupe'].";"."\n");
 				fclose($Fecriture);	
+
+				$file=fopen('./data/logs.txt','a');
+				$write_logs= date("Y-m-d H:i:s")." : ".$_GET['ident']." has been registered."."\n";
+				fwrite($file, $write_logs);
+				fclose($file);
 	   			echo "<<p style='text-align: center;'>Nouvel utilisateur inscrit</p>";	    
 	        
 			}
@@ -69,7 +77,8 @@ function souscription(){
 		echo "Mots de passe inscrit différent";
 	}
 }
-]
+}
+
 souscription();
 
 ?>

@@ -3,7 +3,7 @@ header('Content-type: application/json');
 function ApiEtu($filliere, $groupe){
 	
 
-	$recup_donnees=file('bdd.csv');
+	$recup_donnees=file('./data/bdd.csv');
 	$infoEtu['name']=$filliere."-".$groupe;
 	$infoEtu['student']=array();
 
@@ -21,7 +21,7 @@ function ApiEtu($filliere, $groupe){
 			continue;
 		}
 
-		array_push($infoEtu['student'],$tableau);
+		array_push($infoEtu['student'],$tableau[$i]);
 	}
 	return($infoEtu);
 
@@ -31,9 +31,31 @@ function ApiEtu($filliere, $groupe){
 function Tabajason($tab){
 	return json_encode($tab);
 }
+function KeyApi($verif){
+	$recup_key=file('./data/mail_api.csv');
+	$found=FALSE;
+	for ($i=0; $i < sizeof($recup_key) ; $i++) { 
+		$line=explode(";", $recup_key[$i]);
+		if ($verif==$line[1]) {
+			$found=TRUE;
+			}
+		}
+			return $found;
+}
+$api_key=$_GET['key'];
+if (KeyApi($api_key)) {
+	$info= ApiEtu($_GET['classe'],$_GET['groupe']);
+	$jayson= Tabajason($info);
 
-$info= ApiEtu('LpiWS','1');
-$jayson= Tabajason($info);
+	$fichier=fopen('./data/logs.txt','a');
+	$write_logs= date("Y-m-d H:i:s")." : "."Api key was used with key ".$api_key.".\n";
+	fwrite($fichier, $write_logs);
+	fclose($fichier);
+}
+else{
+	$erreur="Clé incorrecte";
+	$jayson= Tabajason($erreur);
+}
 
 echo $jayson;
 

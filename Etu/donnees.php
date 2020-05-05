@@ -9,7 +9,10 @@ session_start();
 	<meta charset="utf-8">
 </head>
 <body>
-	<h1>Vos données personnelles</h1>
+	<header>
+		<h1>Vos données personnelles</h1>
+		<a href="index.php"><img src="./images_html/house.webp" class="logo"></a>
+	</header>
 	<div class="cadre">
 		<p>Sélectionner/changer photo de profil</p>
 		<form class="upload" method="post" enctype="multipart/form-data" action="donnees.php">
@@ -17,16 +20,17 @@ session_start();
 			<input type="submit" name="upload" value="Uploader">
 		</form>
 		<?php
-			$recup_donnees=file("bdd.csv");
+			$recup_donnees=file("./data/bdd.csv");
 			for ($i=0; $i < sizeof($recup_donnees); $i++) { 
 				$Lpl=explode(";", $recup_donnees[$i]);
-				if ($_SESSION['ident']== $Lpl[2]){
+				if ($_SESSION['identifiant']== $Lpl[2]){
 					$identite=$Lpl;
 				}
 			}
 			$_SESSION['nom']=$identite[0];
 			$_SESSION['prenom']=$identite[1];
 			$_SESSION['mdp']=$identite[3];
+
 		?>
 
 		
@@ -60,11 +64,16 @@ session_start();
     			if( !move_uploaded_file($tmp_file, $content_dir . $name_file) ){
         			exit("Impossible de copier le fichier dans $content_dir");
     			}
+    			$fichier=fopen('./data/logs.txt','a');
+				$write_logs= date("Y-m-d H:i:s")." : ".$_SESSION['identifiant']." put a new profile photo."."\n";
+				fwrite($fichier, $write_logs);
+				fclose($fichier);
 
 			}
+		
 
 		?>
-<img src="<?php echo 'images/' . basename($identite[2].".jpg");?>" alt='image to upload'>
+<img src="<?php echo 'images/' . basename($_SESSION['identifiant'].".jpg");?>" alt='image to upload'>
 
 		
 		<p id="infos"><strong>Nom</strong> : <?php echo $identite[0]; ?></p>
