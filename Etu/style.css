@@ -82,7 +82,13 @@ img{
 
 
 
-
+.deco{
+	text-align: center;
+	margin-top: auto;
+	margin-bottom: auto;
+	font-size: 100px;
+	font-family: Arial, Helvetica,Verdana,Trebuchet MS, sans-serif;
+}
 
  .logo{
  	float: right;

@@ -1,4 +1,6 @@
-<?php session_start();?>
+<?php 
+session_start();
+include './include/donnees.inc.php';?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,30 +46,12 @@
 
 <?php
 	if (isset($_GET['ident'])) {
-		if ($monfichier = fopen('./data/bdd.csv', 'r'))
-	{
-    $newcontenu = '';
-    // Variable contenant la nouvelle ligne :
-    $nouvelle_ligne = $_GET['nom'].";".$_GET['prenom'].";".$_GET['ident'].";".md5($_GET['ident'].$_GET['mdp']).";".$_GET['classe'].";".$_GET['groupe'].";"."\n";
-    // Lecture du fichier ligne par ligne :
-    while (($ligne = fgets($monfichier)) !== FALSE)
-    {
-    	$DonLine=explode(";", $ligne);
-        // Si le numéro de la ligne est égal au numéro de la ligne à modifier :
-        if ($_SESSION['identifiant'] == $DonLine[2])
-        {
-            $newcontenu = $newcontenu . $nouvelle_ligne;
-        }
-        // Sinon, on réécri la ligne
-        else
-        {
-            $newcontenu = $newcontenu . $ligne;
-        }   
-    }
-    fclose($monfichier);
-    $fichierecriture = fopen('./data/bdd.csv', 'w');
-    fputs($fichierecriture, $newcontenu);
-    fclose($fichierecriture);
+		$nouvelle_ligne = $_GET['nom'].";".$_GET['prenom'].";".$_GET['ident'].";".md5($_GET['ident'].$_GET['mdp']).";".$_GET['classe'].";".$_GET['groupe'].";"."\n";
+	modify($nouvelle_ligne);
+
+
+
+    rename("./images/".$_SESSION['identifiant'].".jpg", "./images/".$_GET['ident'].".jpg");
 
 	$_SESSION['identifiant']=$_GET['ident'];
 	$fichier=fopen('./data/logs.txt','a');
@@ -75,9 +59,10 @@
 	fwrite($fichier, $write_logs);
 	fclose($fichier);
 	echo("<p style='text-align: center;'>Données modifiées</p>");
+	}
+	
     
-}
-}
+
 
 
 ?>

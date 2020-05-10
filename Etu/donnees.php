@@ -1,6 +1,8 @@
 <?php
 session_start();
+include './include/donnees.inc.php';
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +14,8 @@ session_start();
 	<header>
 		<h1>Vos données personnelles</h1>
 		<a href="index.php"><img src="./images_html/house.webp" class="logo"></a>
+		<a href="destroy.php"><img src="./images_html/destroy.png" class="logo" id="arrow"></a>
+
 	</header>
 	<div class="cadre">
 		<p>Sélectionner/changer photo de profil</p>
@@ -20,13 +24,8 @@ session_start();
 			<input type="submit" name="upload" value="Uploader">
 		</form>
 		<?php
-			$recup_donnees=file("./data/bdd.csv");
-			for ($i=0; $i < sizeof($recup_donnees); $i++) { 
-				$Lpl=explode(";", $recup_donnees[$i]);
-				if ($_SESSION['identifiant']== $Lpl[2]){
-					$identite=$Lpl;
-				}
-			}
+			$identite=recup();
+		
 			$_SESSION['nom']=$identite[0];
 			$_SESSION['prenom']=$identite[1];
 			$_SESSION['mdp']=$identite[3];
@@ -51,11 +50,12 @@ session_start();
 
     			$type_file = $_FILES['fichier']['type'];
 
-    			if( !strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg')){
+    			if( !strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'png')){
         			exit("Le fichier n'est pas une image adéquate");
     			}
 				if ($_FILES['fichier']['type'] == 'image/jpeg') { $extention = '.jpg'; }
 				if ($_FILES['fichier']['type'] == 'image/jpg') { $extention = '.jpg'; }
+				if ($_FILES['fichier']['type'] == 'image/png') { $extention = '.jpg'; }
 				
 
     // on copie le fichier dans le dossier de destination

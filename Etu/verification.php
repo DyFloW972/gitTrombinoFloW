@@ -1,20 +1,7 @@
 <?php
 
 
-	function verification($id,$mdp){
-		
-			$lecture=file('./data/bdd.csv');
-			$found= FALSE;
-			for ($i=0; $i < sizeof($lecture) ; $i++) { 
-				$Rlignes= explode(";", $lecture[$i]);
-				if ($id==$Rlignes[2] && md5($id.$mdp)==$Rlignes[3]) {
-	        		$found=TRUE;
-	    		}
-	    
-			}
-			return $found;
-		}
-
+	include './include/users.inc.php';
 
 	session_start();
 	$ident='';
